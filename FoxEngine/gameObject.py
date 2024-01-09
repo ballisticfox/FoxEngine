@@ -15,4 +15,4 @@ class gameObject:
         self.bottomRight = Vector2(self.objectPosition.x+self.objectSize.x,self.objectPosition.y)
         
     def __init__(self, objectSize: Vector2, objectPosition: Vector2) -> None:
-        
+        pass
