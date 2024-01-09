@@ -62,3 +62,19 @@ class Color:
         b = self.b()*255
         return tuple((r,g,b))
     
+class ColorTypes:
+    
+    ### Grayscale ###
+    WHITE   = Color(1,1,1)
+    GRAY    = Color(0.5,0.5,0.5)
+    BLACK   = Color(0,0,0)
+    
+    ### Primary ###
+    RED     = Color(1,0,0)
+    GREEN   = Color(0,1,0)
+    BLUE    = Color(0,0,1)
+
+    ### Secondary
+    YELLOW  = Color(1,1,0)
+    MAGENTA = Color(1,0,1)
+    CYAN    = Color(0,1,1)

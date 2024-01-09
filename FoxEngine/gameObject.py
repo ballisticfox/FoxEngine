@@ -1,5 +1,6 @@
 from dataTypes import *
 from texture import *
+import math
 
 class Screen:
     screenResX: int
@@ -15,9 +16,21 @@ class Screen:
     def WorldToPixel(self, x: float, y: float) -> tuple:
         uvX = (x+abs(self.screenRangeX.x))/self.screenLengthX
         pixelX = int(self.screenResX*uvX)
+        if pixelX > self.screenResX:
+            pixelX = self.screenResX
+        if pixelX < 0:
+            pixelY = 0
         
+        y = y+1
         uvY = (y*self.aspectRatio+abs(self.screenRangeX.y/self.aspectRatio))/self.screenLengthY
-        pixelY = int(self.screenResY*uvY)
+        uvY = 1-uvY
+        
+        pixelY = int(math.ceil(self.screenResY*uvY))
+        
+        if pixelY > self.screenResY:
+            pixelY = self.screenResY
+        if pixelY < 0:
+            pixelY = 0
 
         return tuple((pixelX,pixelY))
     
