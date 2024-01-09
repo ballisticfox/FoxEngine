@@ -9,8 +9,8 @@ class main:
     screenResY = 270
     aspectRatio = screenResX/screenResY
         
-    screenMinX = -2
-    screenMaxX = 2
+    screenMinX = -4
+    screenMaxX = 4
         
     screenMinY = -4
     screenMaxY = 4
@@ -76,7 +76,8 @@ class main:
         while running:
             for y in range(0,Buffer.Height):
                 for x in range(0,Buffer.Width):
-                    pygame.draw.rect(screen, Buffer.GetPixel(x,y), pygame.Rect(x,y,1,1))
+                    screen.set_at((x,y), Buffer.GetPixel(x,y))
+                    #pygame.draw.rect(screen, , pygame.Rect(x,y,1,1))
     
             ##Update after every line
             for event in pygame.event.get():
