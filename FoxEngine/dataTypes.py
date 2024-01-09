@@ -21,11 +21,11 @@ class Vector2:
         
 
 class Color:
-    color = tuple((0,0,0))
+    color = tuple((0,0,0,0))
     
-    def __init__(self, r: float, g: float, b: float) -> None:
+    def __init__(self, r: float, g: float, b: float, a = 1.0) -> None:
         
-        self.color = tuple((r,g,b))
+        self.color = tuple((r,g,b,a))
     
     #Returns the red value of the color
     def r(self) -> float:
@@ -39,8 +39,11 @@ class Color:
     def b(self) -> float:
         return self.color[2]
     
-    def SetColor(self, r: float, g: float, b: float) -> None:
-        self.color = tuple((r,g,b))
+    def a(self) -> float:
+        return self.color[3]
+    
+    def SetColor(self, r: float, g: float, b: float, a: 1.0) -> None:
+        self.color = tuple((r,g,b,a))
     
     def GetColor(self): #-> Color
         r = self.r()

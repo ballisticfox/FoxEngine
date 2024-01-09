@@ -1,4 +1,5 @@
 import pygame
+from gameObject import *
 from texture import Texture2D
 from dataTypes import *
 
@@ -28,10 +29,7 @@ class main:
         
         uvY = (y*self.aspectRatio+abs(self.screenMinY/self.aspectRatio))/self.screenRangeY
         pixelY = int(self.screenResY*uvY)
-        
-        print(x,y)
-        print(uvX, uvY)
-        print(pixelX, pixelY)
+
         return tuple((pixelX,pixelY))
 
         
@@ -44,9 +42,10 @@ class main:
         screen = pygame.display.set_mode((self.screenResX, self.screenResY))  # Start the screen
         running = True
 
+        White = Color(1,1,1)
         Black = Color(0,0,0)
-        Red = Color(1,0,0)
-        Green = Color(0,1,0)
+        Red   = Color(1,0,0)
+        Green = Color(0,1,0,0.3)
         Error = Color(1,0,1)
         
         
@@ -55,23 +54,15 @@ class main:
         for x in range(0,self.screenResX):
             Buffer.SetPixel(x,int(self.screenResY/2),Green)
         
-        objectSizeX = 1
-        objectSizeY = 1
-        objectPosX = 1
-        objectPosY = 0
-        objectTopLeftCorner = tuple((objectPosX,objectPosY+objectSizeY))
-        objectBottomRightCorner  = tuple((objectPosX+objectSizeX,objectPosY))
+        cube = gameObject("cube", Vector2(1,1), Vector2(0,0), Color(1,0,0))
         
-        objectTopLeftCorner = self.WorldToPixel(objectTopLeftCorner[0], objectTopLeftCorner[1])
-        objectBottomRightCorner = self.WorldToPixel(objectBottomRightCorner[0], objectBottomRightCorner[1])
-        
-        for y in range(objectBottomRightCorner[1],objectTopLeftCorner[1]):
-            for x in range(objectTopLeftCorner[0],objectBottomRightCorner[0]):
-                Buffer.SetPixel(x,y,Red)
+        #for y in range(objectBottomRightCorner[1],objectTopLeftCorner[1]):
+        #    for x in range(objectTopLeftCorner[0],objectBottomRightCorner[0]):
+        #        Buffer.SetPixel(x,y,Red)
 
 
-        print(objectTopLeftCorner)
-        print(objectBottomRightCorner)
+        #print(objectTopLeftCorner)
+        #print(objectBottomRightCorner)
                 
         while running:
             for y in range(0,Buffer.Height):
