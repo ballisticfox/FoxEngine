@@ -1,22 +1,19 @@
 import math
 
 class Vector2:
-    vector = tuple((0,0))
+    xy = tuple((0,0))
+    x = 0.0
+    y = 0.0
     
     def __init__(self, x: float, y: float) -> None:
-        self.vector = tuple((x,y))
-        
-    def x(self) -> float:
-        return self.vector[0]
-    
-    def y(self) -> float:
-        return self.vector[1]
+        self.xy = tuple((x,y))
+        self.x = x
+        self.y = y
     
     def SetVector(self, x: float, y: float) -> None:
-        self.vector = tuple((x,y))
-
-    def GetVector(self) -> tuple:
-        return self.vector
+        self.xy = tuple((x,y))
+        self.x = x
+        self.y = y
     
     def Length(self) -> float:
         return math.sqrt(math.pow(self.x(), 2)+math.pow(self.y(), 2))

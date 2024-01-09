@@ -1,70 +1,57 @@
 import pygame
 from gameObject import *
-from texture import Texture2D
+from texture import *
 from dataTypes import *
 
 class main:
-    
-    ###GLOBAL VARIABLES###
-    screenResX = 480
-    screenResY = 270
-    aspectRatio = screenResX/screenResY
-        
-    screenMinX = -4
-    screenMaxX = 4
-        
-    screenMinY = -4
-    screenMaxY = 4
-    
-    screenRangeX = screenMaxX-screenMinX
-    screenUnitX = screenResX/screenRangeX
 
-    screenRangeY = screenMaxY-screenMinY
-    screenUnitY = screenResY/screenRangeY
-    
-    
-    def WorldToPixel(self, x, y):
-        uvX = (x+abs(self.screenMinX))/self.screenRangeX
-        pixelX = int(self.screenResX*uvX)
-        
-        uvY = (y*self.aspectRatio+abs(self.screenMinY/self.aspectRatio))/self.screenRangeY
-        pixelY = int(self.screenResY*uvY)
 
-        return tuple((pixelX,pixelY))
 
         
     ###     MAIN    ###
     def main(self):
         pygame.init()  # Start Pygame
 
-        
 
-        screen = pygame.display.set_mode((self.screenResX, self.screenResY))  # Start the screen
-        running = True
-
+        ###DEFAULT COLORS###
         White = Color(1,1,1)
+        Gray = Color(0.5,0.5,0.5)
         Black = Color(0,0,0)
         Red   = Color(1,0,0)
         Green = Color(0,1,0,0.3)
         Error = Color(1,0,1)
         
         
-        Buffer = Texture2D(self.screenResX,self.screenResY, Black)
+        sceneObjects = []
+        gameScreen = Screen(480,270,Vector2(-4,4),Vector2(-4,4))
+    
+        screen = pygame.display.set_mode((gameScreen.screenResX, gameScreen.screenResY))  # Start the screen
+        running = True
+  
+        Buffer = Texture2D(gameScreen.screenResX,gameScreen.screenResY, Gray)
         
-        for x in range(0,self.screenResX):
-            Buffer.SetPixel(x,int(self.screenResY/2),Green)
+        #Random Line
+        for x in range(0,gameScreen.screenResX):
+            Buffer.SetPixel(x,int(gameScreen.screenResY/2),Green)
         
-        cube = gameObject("cube", objectSize = Vector2(1,1), objectPosition = Vector2(0,0), color = Color(1,0,0))
+        cubeRed = gameObject(gameScreen, "cube", objectSize = Vector2(0.65,1), objectPosition = Vector2(0,0), color = Color(0,0,1,0.5))
+        sceneObjects.append(cubeRed)
         
-        #for y in range(objectBottomRightCorner[1],objectTopLeftCorner[1]):
-        #    for x in range(objectTopLeftCorner[0],objectBottomRightCorner[0]):
-        #        Buffer.SetPixel(x,y,Red)
+        cubeGreen = gameObject(gameScreen, "cube", objectSize = Vector2(0.5,1), objectPosition = Vector2(0.5,0), color = Color(1,1,1,0.5))
+        sceneObjects.append(cubeGreen)
 
-
-        #print(objectTopLeftCorner)
-        #print(objectBottomRightCorner)
+        cubeBlue = gameObject(gameScreen, "cube", objectSize = Vector2(0.65,1), objectPosition = Vector2(0.85,0), color = Color(1,0,0,0.5))
+        sceneObjects.append(cubeBlue)
                 
         while running:
+            
+            for object in sceneObjects:
+                for y in range(object.pixelBottom, object.pixelTop):
+                    for x in range(object.pixelLeft, object.pixelRight):
+                        Buffer.SetPixel(x,y,object.color)
+            
+            
+            ###BUFFER TO SCREEN###
             for y in range(0,Buffer.Height):
                 for x in range(0,Buffer.Width):
                     screen.set_at((x,y), Buffer.GetPixel(x,y))
