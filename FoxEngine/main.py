@@ -1,4 +1,5 @@
 import pygame
+import keyboard
 from gameObject import *
 from texture import *
 from dataTypes import *
@@ -14,7 +15,7 @@ class main:
         
         sceneObjects = []
         gameScreen = Screen(480,270,Vector2(-4,4),Vector2(-4,4))
-    
+        RawAxis = Vector2(0,0)
         screen = pygame.display.set_mode((gameScreen.screenResX, gameScreen.screenResY))  # Start the screen
         running = True
   
@@ -33,6 +34,9 @@ class main:
                 
         while running:
             
+            print(Input.GetAxisRaw().xy)
+
+                
             ### OBJECTS TO BUFFER ###
             for object in sceneObjects:
                 for y in range(object.pixelTop, object.pixelBottom):

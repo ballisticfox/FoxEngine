@@ -1,6 +1,7 @@
 from dataTypes import *
 from texture import *
 import math
+import keyboard
 
 class Screen:
     screenResX: int
@@ -50,7 +51,26 @@ class Screen:
         self.UpdateRanges()
         self.UpdateAspectRatio()
         
-    
+class Input:
+    @staticmethod
+    def GetAxisRaw() -> Vector2:
+        RawAxis = Vector2(0,0)
+        RawX = 0
+        RawY = 0
+        
+        if keyboard.is_pressed("w"):
+            RawY = 1
+        elif keyboard.is_pressed("s"):
+            RawY = -1
+
+        if keyboard.is_pressed("d"):
+            RawX = 1
+        elif keyboard.is_pressed("a"):
+            RawX = -1
+        RawAxis.SetVector(RawX,RawY)
+        return RawAxis
+        
+        
 
 class gameObject:
     screenData: Screen

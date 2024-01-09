@@ -1,10 +1,11 @@
 import math
+from typing import Any
 
 class Vector2:
     xy = tuple((0,0))
     x = 0.0
     y = 0.0
-    
+        
     def __init__(self, x: float, y: float) -> None:
         self.xy = tuple((x,y))
         self.x = x
