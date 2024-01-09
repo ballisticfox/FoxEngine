@@ -54,7 +54,7 @@ class main:
         for x in range(0,self.screenResX):
             Buffer.SetPixel(x,int(self.screenResY/2),Green)
         
-        cube = gameObject("cube", Vector2(1,1), Vector2(0,0), Color(1,0,0))
+        cube = gameObject("cube", objectSize = Vector2(1,1), objectPosition = Vector2(0,0), color = Color(1,0,0))
         
         #for y in range(objectBottomRightCorner[1],objectTopLeftCorner[1]):
         #    for x in range(objectTopLeftCorner[0],objectBottomRightCorner[0]):

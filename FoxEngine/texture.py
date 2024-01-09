@@ -37,9 +37,6 @@ class Texture2D:
             ExistingColor.b()*(1-color.a())+color.b()*(color.a())
             )
         
-        #print(color.GetColor().GetTuple())
-        print(NewColor.GetTuple())
-        print(color.a())
         self.texture[y][x] = NewColor
     
     def GetPixel(self, x: int, y: int) -> Color:

@@ -12,11 +12,13 @@ class Vector2:
     def y(self) -> float:
         return self.vector[1]
     
+    def SetVector(self, x: float, y: float) -> None:
+        self.vector = tuple((x,y))
+
     def GetVector(self) -> tuple:
         return self.vector
     
     def Length(self) -> float:
-        print()
         return math.sqrt(math.pow(self.x(), 2)+math.pow(self.y(), 2))
         
 
