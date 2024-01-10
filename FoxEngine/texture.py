@@ -25,6 +25,7 @@ class Texture2D:
         return x, y
     
     def SetPixel(self, x: int, y: int, color: Color):
+        x, y = self.CheckBounds(x,y)
         ExistingColor: Color
         NewColor : Color
         

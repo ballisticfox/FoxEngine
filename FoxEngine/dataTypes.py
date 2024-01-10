@@ -1,5 +1,11 @@
 import math
 from typing import Any
+import time
+
+class Timing:
+    @staticmethod
+    def current_milli_time():
+        return round(time.time() * 1000)
 
 class Vector2:
     xy = tuple((0,0))

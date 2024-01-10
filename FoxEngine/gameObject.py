@@ -53,19 +53,19 @@ class Screen:
         
 class Input:
     @staticmethod
-    def GetAxisRaw() -> Vector2:
+    def GetAxisRaw(VerticalPos: str, HorizontalNeg: str, VerticalNeg: str, HorizontalPos: str) -> Vector2:
         RawAxis = Vector2(0,0)
         RawX = 0
         RawY = 0
         
-        if keyboard.is_pressed("w"):
+        if keyboard.is_pressed(VerticalPos):
             RawY = 1
-        elif keyboard.is_pressed("s"):
+        elif keyboard.is_pressed(VerticalNeg):
             RawY = -1
 
-        if keyboard.is_pressed("d"):
+        if keyboard.is_pressed(HorizontalPos):
             RawX = 1
-        elif keyboard.is_pressed("a"):
+        elif keyboard.is_pressed(HorizontalNeg):
             RawX = -1
         RawAxis.SetVector(RawX,RawY)
         return RawAxis
@@ -79,6 +79,9 @@ class gameObject:
     objectPosition = Vector2(0,0)
     color          = Color(1,0,1,1)
     texture        = Texture2D(2,2,Color(1,0,1))
+    playerController = False
+    playerSpeed = Vector2(0,0)
+    playerChannel = 0
     
     top    = 0.0
     left   = 0.0
@@ -105,6 +108,22 @@ class gameObject:
         self.pixelTop = TopLeft[1]
         self.pixelBottom = BottomRight[1]
         
+    def SetPosition(self, objectPosition: Vector2):
+        self.objectPosition = objectPosition
+        self.UpdateBounds()
+    
+    def PlayerMovement(self, InputAxis: Vector2):
+        self.objectPosition = Vector2(self.objectPosition.x+(InputAxis.x*self.playerSpeed.x), self.objectPosition.y+(InputAxis.y*self.playerSpeed.y))
+        self.UpdateBounds()
+
+    def AddPlayerController(self, playerSpeed: Vector2, channel: int):
+        self.playerController = True
+        self.playerChannel = channel
+        self.playerSpeed = playerSpeed
+        
+    def RemovePlayerController(self):
+        self.playerController = False
+
     def __init__(self, screen: Screen, name: str, objectSize: Vector2, objectPosition: Vector2, color: Color) -> None:
         self.screenData = screen
         self.name = name
@@ -113,4 +132,3 @@ class gameObject:
         self.color = color
         
         self.UpdateBounds()
-        pass
