@@ -1,0 +1,29 @@
+10 Byte Header - Verifying Data
+46 4F 58 54 59 50 45
+1 Byte Header - Type (L, RGB, RGBA)
+/TYPES/
+00 - L (Grayscale)
+01 - RGB
+02 - RGBA
+
+2 Byte Header - Width
+2 Byte Header - Height
+
+###BODY###
+FF, FF, FF, FF,
+FF, FF, FF, FF,
+FF, FF, FF, FF,
+FF, FF, FF, FF,
+
+
+
+
+###HEADER###
+46 4F 58 54 59 50 45
+00
+00 FF
+00 FF
+FF FF FF FF
+FF FF FF FF
+FF FF FF FF
+FF FF FF FF

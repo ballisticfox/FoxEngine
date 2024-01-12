@@ -23,8 +23,12 @@ class main:
 
         #cubeYellow = gameObject(gameScreen, "cube", objectSize = Vector2(5,5), objectPosition = Vector2(-2,0), color = ColorTypes.YELLOW)
         #sceneObjects.append(cubeYellow)
+        
         backdrop = gameObject(gameScreen, "backdrop", objectSize = Vector2(gameScreen.screenLengthX,gameScreen.screenLengthY), objectPosition = Vector2(gameScreen.screenRangeX.x,gameScreen.screenRangeY.x), color = ColorTypes.BLACK)
         sceneObjects.append(backdrop)
+        
+        Ball = gameObject(gameScreen, "Ball", objectSize=Vector2(0.45,0.45), objectPosition=Vector2(0,0), color = ColorTypes.GREEN)
+        sceneObjects.append(Ball)
         
         LPaddle = gameObject(gameScreen, "leftPaddle", objectSize = Vector2(0.25,1.25), objectPosition = Vector2(-3,-1.25), color = ColorTypes.WHITE)
         LPaddle.AddPlayerController(Vector2(0,0.35),1)
@@ -43,7 +47,11 @@ class main:
             PreFrameTime = Timing.current_milli_time()
             ### OBJECTS TO BUFFER ###
             PreAllObjectsToBufferTime = Timing.current_milli_time()
+            
+            
+            
             for object in sceneObjects:
+                object.UpdateScreen(gameScreen)
                 if (object.playerController == True and object.playerChannel == 1):
                     object.PlayerMovement(Input.GetAxisRaw("w","a","s","d"))
                 
@@ -64,6 +72,7 @@ class main:
                 for x in range(0,Buffer.Width):
                     screen.set_at((x,y), Buffer.GetPixel(x,y))
             PostScreenDrawTime = Timing.current_milli_time()
+            
             print("Screen Draw time: " + str((PostScreenDrawTime-PreScreenDrawTime))+"ms")
             
             

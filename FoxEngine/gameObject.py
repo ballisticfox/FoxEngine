@@ -75,13 +75,23 @@ class Input:
 class gameObject:
     screenData: Screen
     name: str
+    
+    #Position and Size Data
     objectSize     = Vector2(0,0)
     objectPosition = Vector2(0,0)
+    
+    
+    #Color Data
     color          = Color(1,0,1,1)
     texture        = Texture2D(2,2,Color(1,0,1))
+    
+    
     playerController = False
     playerSpeed = Vector2(0,0)
     playerChannel = 0
+    
+    
+    
     
     top    = 0.0
     left   = 0.0
@@ -123,6 +133,9 @@ class gameObject:
         
     def RemovePlayerController(self):
         self.playerController = False
+    
+    def UpdateScreen(self, screenData):
+        self.screenData = screenData
 
     def __init__(self, screen: Screen, name: str, objectSize: Vector2, objectPosition: Vector2, color: Color) -> None:
         self.screenData = screen
